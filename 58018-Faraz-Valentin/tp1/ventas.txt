@@ -1,0 +1,6 @@
+Juan peres, 1299, alimentos, contado
+valentin Faraz, 963.8, internet, tarjeta
+Luis Faraz, 10122265, auto, tarjeta
+Roberto Gomez, 558663, varios , contado
+Alejandro Asfgg, 4898, cama, contado
+Jose Thor, 158895, pc, tarjeta

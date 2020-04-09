@@ -1,0 +1,81 @@
+[
+{
+    "nombre": "Juan peres",
+    "monto": 1299.0,
+    "descripcion": "alimentos",
+    "formapago": "contado"
+},
+{
+    "nombre": "valentin Faraz",
+    "monto": 963.8,
+    "descripcion": "internet",
+    "formapago": "tarjeta"
+},
+{
+    "nombre": "Luis Faraz",
+    "monto": 10122265.0,
+    "descripcion": "auto",
+    "formapago": "tarjeta"
+},
+{
+    "nombre": "Roberto Gomez",
+    "monto": 558663.0,
+    "descripcion": "varios ",
+    "formapago": "contado"
+},
+{
+    "nombre": "Alejandro Asfgg",
+    "monto": 4898.0,
+    "descripcion": "cama",
+    "formapago": "contado"
+},
+{
+    "nombre": "Jose Thor",
+    "monto": 158895.0,
+    "descripcion": "pc",
+    "formapago": "tarjeta"
+}
+]
+[
+{
+    "nombre": "Juan peres",
+    "monto": 1299.0,
+    "descripcion": "alimentos",
+    "formapago": "contado"
+},
+{
+    "nombre": "valentin Faraz",
+    "monto": 963.8,
+    "descripcion": "internet",
+    "formapago": "tarjeta"
+},
+{
+    "nombre": "Luis Faraz",
+    "monto": 10122265.0,
+    "descripcion": "auto",
+    "formapago": "tarjeta"
+},
+{
+    "nombre": "Roberto Gomez",
+    "monto": 558663.0,
+    "descripcion": "varios ",
+    "formapago": "contado"
+},
+{
+    "nombre": "Alejandro Asfgg",
+    "monto": 4898.0,
+    "descripcion": "cama",
+    "formapago": "contado"
+},
+{
+    "nombre": "Jose Thor",
+    "monto": 158895.0,
+    "descripcion": "pc",
+    "formapago": "tarjeta"
+}
+]
+[
+[
+[
+[
+[

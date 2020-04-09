@@ -25,7 +25,7 @@ class Alumno():
             print("Se encuentra en el grupo A")
             return(False)
         print("Error de ingreso")
-
+        
 if __name__ == "__main__":
     u = Alumno()
     u.elegir_grupo()
