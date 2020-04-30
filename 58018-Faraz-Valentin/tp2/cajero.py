@@ -2,6 +2,7 @@ from billetes import *
 import math
 
 class Cajero():
+
     def __init__(self):
         self.billetes_mil = []
         self.billetes_quinientos = []
@@ -78,7 +79,6 @@ class Cajero():
             else:
                 self.extraccion = []
                 return("Error. No hay una combinación de billetes que nos permita extraer ese monto.")
-
         veces100 = str(self.extraccion.count("$100"))+" billetes de $100, "
         veces200 = str(self.extraccion.count("$200"))+" billetes de $200, "
         veces500 = str(self.extraccion.count("$500"))+" billetes de $500, "
@@ -120,9 +120,7 @@ class Cajero():
             sacar = 1000
             sin_cambio = 0
         sin_cambio = monto - sacar
-
         #self.extraer_dinero(sin_cambio)
-
         total_billetes_cambio = (len(self.billetes_cien)*100 + len(self.billetes_doscientos)*200
                                 + len(self.billetes_quinientos)*500)
         while sacar <  total_billetes_cambio or (sacar - total_billetes_cambio)%100 == 0:
@@ -170,7 +168,6 @@ if __name__ == "__main__":
     billete200 = BilleteDe200()
     billete500 = BilleteDe500()
     billete1000 = BilleteDe1000()
-
     cajero.agregar_dinero(
                             [billete1000,billete1000,billete1000,
                             billete1000,billete1000,billete1000,
