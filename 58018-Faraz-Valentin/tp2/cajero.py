@@ -8,6 +8,7 @@ class Cajero():
         self.billetes_doscientos = []
         self.billetes_cien = []
         self.total = 0
+        self.extraccion = []
 
     def agregar_dinero(self,lista_billetes):
         for x in lista_billetes:
@@ -24,6 +25,7 @@ class Cajero():
         billetes =[len(self.billetes_cien), len(self.billetes_doscientos),
                     len(self.billetes_quinientos), len(self.billetes_mil)]
         self.total = (billetes[0]*100 + billetes[1]*200 + billetes[2]*500 + billetes[3]*1000)
+        #print(self.total)
         billetes_contados=[]
         for x in range(len(billetes)):
             if x == 0:
@@ -44,41 +46,43 @@ class Cajero():
     def extraer_dinero(self,monto):
         disponible =[len(self.billetes_cien), len(self.billetes_doscientos),
                     len(self.billetes_quinientos), len(self.billetes_mil)]
+        contador = 0
         if monto%100 != 0:
             return("El monto no es multiplo de 100")
         if monto > self.total:
             return("No hay suficiente dinero")
-        exctraccion = []
+        #self.extraccion = []
         while True:
             while monto >= 1000 and disponible[3] != 0:
                 disponible[3] -= 1
-                self.total -= 1000
+                contador += 1000
                 monto -= 1000
-                exctraccion.append("$1000")
+                self.extraccion.append("$1000")
             while monto >= 500 and disponible[2] != 0:
                 disponible[2] -= 1
-                self.total -= 500
+                contador += 500
                 monto -= 500
-                exctraccion.append("$500")
+                self.extraccion.append("$500")
             while monto >= 200 and disponible[1] != 0:
                 disponible[1] -= 1
-                self.total -= 200
+                contador += 200
                 monto -= 200
-                exctraccion.append("$200")
+                self.extraccion.append("$200")
             while monto >= 100 and disponible[0] != 0:
                 disponible[0] -= 1
-                self.total -= 100
+                contador += 100
                 monto -= 100
-                exctraccion.append("$100")
+                self.extraccion.append("$100")
             if monto == 0:
                 break
             else:
-                print("No se encuentran los billetes necesarios para extraer ese monto")
-                break
-        veces100 = str(exctraccion.count("$100"))+" billetes de $100, "
-        veces200 = str(exctraccion.count("$200"))+" billetes de $200, "
-        veces500 = str(exctraccion.count("$500"))+" billetes de $500, "
-        veces1000 = str(exctraccion.count("$1000"))+" billetes de $1000"
+                self.extraccion = []
+                return("Error. No hay una combinación de billetes que nos permita extraer ese monto.")
+
+        veces100 = str(self.extraccion.count("$100"))+" billetes de $100, "
+        veces200 = str(self.extraccion.count("$200"))+" billetes de $200, "
+        veces500 = str(self.extraccion.count("$500"))+" billetes de $500, "
+        veces1000 = str(self.extraccion.count("$1000"))+" billetes de $1000"
         billetes_extraidos=""
         if veces100 != 0:
             billetes_extraidos += veces100
@@ -88,6 +92,7 @@ class Cajero():
             billetes_extraidos += veces500
         if veces1000 != 0:
             billetes_extraidos += veces1000
+        self.total = (self.total - contador)
         return(billetes_extraidos)
     
     def extraer_dinero_cambio(self, monto, porc):
@@ -109,9 +114,15 @@ class Cajero():
             sacar = (int(sacar[::-1]) + 1) * 100
         if sacar - porc >= 100 or sacar - porc <= 0:
             sacar = porc
-        exctraccion = []
+        self.extraccion = []
         sin_cambio = monto - sacar
-        print(self.extraer_dinero(sin_cambio))
+        if self.extraer_dinero(sin_cambio) == "Error. No hay una combinación de billetes que nos permita extraer ese monto.":
+            sacar = 1000
+            sin_cambio = 0
+        sin_cambio = monto - sacar
+
+        #self.extraer_dinero(sin_cambio)
+
         total_billetes_cambio = (len(self.billetes_cien)*100 + len(self.billetes_doscientos)*200
                                 + len(self.billetes_quinientos)*500)
         while sacar <  total_billetes_cambio or (sacar - total_billetes_cambio)%100 == 0:
@@ -122,7 +133,7 @@ class Cajero():
                 resto = sacar %200
                 if resto == 0:
                     disponible[0] = 0
-                exctraccion.append("$100")
+                self.extraccion.append("$100")
             while sacar >= 200 and disponible[1] != 0:
                 disponible[1] -= 1
                 self.total -= 200
@@ -130,7 +141,7 @@ class Cajero():
                 resto = sacar %500
                 if resto == 0:
                     disponible[1] = 0
-                exctraccion.append("$200")
+                self.extraccion.append("$200")
             while sacar >= 500 and disponible[2] != 0:
                 disponible[2] -= 1
                 self.total -= 500
@@ -138,7 +149,7 @@ class Cajero():
                 resto = sacar %1000
                 if resto == 0:
                     disponible[2] = 0
-                exctraccion.append("$500")
+                self.extraccion.append("$500")
             if sacar == 0:
                 break
             else:
@@ -147,8 +158,10 @@ class Cajero():
                 disponible[3] -= 1
                 self.total -= 1000
                 sacar -= 1000
-                exctraccion.append("$1000")
-        return("cambio",exctraccion)
+                self.extraccion.append("$1000")
+
+        #return(self.extraer_dinero(sin_cambio),"cambio",self.extraccion)
+        return(self.extraer_dinero(sin_cambio))
 
 if __name__ == "__main__":
     cajero = Cajero()
@@ -165,16 +178,18 @@ if __name__ == "__main__":
                             billete1000,billete1000,billete1000,
                             billete1000,billete1000,billete1000,
                             
-                            billete200,billete200,billete200,billete200,billete200,billete100])
+                            billete500,billete500,billete500,billete500,billete500,
+                            billete500,billete500,billete500,billete500,billete500,
+                            billete500,billete500,billete500,billete500,billete500])
                         
                             
     print(cajero.contar_dinero())
-    print(cajero.extraer_dinero(5000))
+    #print(cajero.extraer_dinero(5000))
     #print("1° extraccion:")
     #print(cajero.extraer_dinero(1800))
     #print("2° extraccion:")
-    #print(cajero.extraer_dinero(3500))
+    print(cajero.extraer_dinero(3500))
     #print("3° extraccion:")
     #print(cajero.extraer_dinero_cambio(9000,10))
     #print("4° extraccion:")
-    #print(cajero.extraer_dinero_cambio(10000,10))
+    print(cajero.extraer_dinero_cambio(7000,10))
