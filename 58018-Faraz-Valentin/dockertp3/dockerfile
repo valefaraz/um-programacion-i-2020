@@ -1,0 +1,5 @@
+FROM python:3
+RUN git clone https://github.com/valefaraz/um-programacion-i-2020
+WORKDIR /um-programacion-i-2020/58018-Faraz-Valentin/tp2
+#RUN pip install -r requirements.txt
+CMD ["python", "./test_cajero.py"]
